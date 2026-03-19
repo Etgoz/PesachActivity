@@ -34,6 +34,3 @@ The project demonstrates that fluid, professional user experiences can be achiev
 
 ## 🏗️ Architecture Philosophy
 This project follows a "Back to Basics" philosophy. Developed within the **Antigravity** environment, it prioritizes **clean, maintainable, and dependency-free code**, proving that fundamental web technologies are the ultimate tool for rapid, reliable deployment.
-
----
-*Developed for the OutSystems Developer Community - March 2026*
