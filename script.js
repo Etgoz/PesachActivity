@@ -10,6 +10,7 @@ async function loadData() {
 
         json.categories.forEach(cat => {
             data[cat.title] = {
+                description: cat.description,
                 shallow: cat.shallow,
                 deep: cat.deep
             };
@@ -31,6 +32,7 @@ function init() {
         card.style.animationDelay = `${index * 0.08}s`;
         card.innerHTML = `
             <h3>${cat}</h3>
+            <h4>${data[cat].description}</h4>
             <div class="btn-group">
                 <button class="btn-shallow" onclick="openQuestion('${cat}', 'shallow')">קליל</button>
                 <button class="btn-deep" onclick="openQuestion('${cat}', 'deep')">עמוק</button>
