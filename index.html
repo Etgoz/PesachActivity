@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פסח 2026 - סמלים ושאלות</title>
+    <title>מדברים פסח - רגע של חיבור ושיחה</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍷</text></svg>">
     <!-- Modern typography from Google Fonts -->
@@ -17,14 +17,26 @@
 
 <body>
 
-    <h1>🍷 פסח 2026: סמלים ושאלות</h1>
+    <button id="how-to-play-btn" onclick="openInstructions()">איך משחקים? ❓</button>
+    <div class="mode-container">
+        <label class="switch">
+            <input type="checkbox" id="mode-toggle" onchange="toggleMode()">
+            <span class="slider round"></span>
+        </label>
+        <div class="mode-labels">
+            <span id="label-family">מצב משפחה 🍷</span>
+            <span id="label-team" class="active">מצב צוות 💻</span>
+        </div>
+    </div>
+    <h1>🍷 מדברים פסח</h1>
+    <h2 id="mode-subtitle" class="mode-subtitle">פעילות גיבוש לצוות</h2>
 
     <div class="grid" id="main-grid">
     </div>
 
-    <div id="overlay">
-        <div id="question-box">
-            <h2 id="overlay-title"></h2>
+    <div id="overlay" class="overlay">
+        <div id="question-box" class="overlay-box">
+            <h2 id="overlay-title" class="overlay-title"></h2>
             <div id="question-text">שאלה תופיע כאן...</div>
             <div class="overlay-btns">
                 <button class="btn-refresh" onclick="generateQuestion()">החלף שאלה 🎲</button>
@@ -32,6 +44,26 @@
             </div>
         </div>
     </div>
+
+    <div id="instructions-overlay" class="overlay">
+        <div class="overlay-box" id="instructions-box">
+            <h2 class="overlay-title">איך משחקים?</h2>
+            <div class="instructions-content">
+                <ul>
+                    <li><strong>פשוט וכיפי:</strong> בוחרים סימן (כרטיס).</li>
+                    <li><strong>קליל או עמוק?</strong> מחליטים אם בא לכם לענות על שאלה קלילה ("חימום") או שאלה קצת יותר
+                        עמוקה ("גילוי").</li>
+                    <li><strong>משתפים:</strong> עונים על השאלה שעלתה. לא זורם? אפשר ללחוץ על ה-🎲 כדי להחליף שאלה.</li>
+                    <li><strong>מעבירים:</strong> כשמסיימים, בוחרים את המשתתף הבא שיענה על שאלה.</li>
+                </ul>
+            </div>
+            <div class="overlay-btns">
+                <button class="btn-back" onclick="closeInstructions()">סגור ✕</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>מדברים פסח | נוצר על ידי איתי גוזלן</footer>
 
     <script src="script.js"></script>
 </body>
