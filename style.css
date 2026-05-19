@@ -7,6 +7,15 @@
     --bg-grad: linear-gradient(135deg, #0b0f19, #1a2235, #311c3a);
     --card-bg: rgba(255, 255, 255, 0.05);
     --card-border: rgba(255, 255, 255, 0.1);
+
+    /* Shavuot theme accents */
+    --shavuot-green: #2d7a4f;
+    --shavuot-green-light: #4caf7d;
+    --shavuot-cream: #f5f0e8;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -14,14 +23,226 @@ body {
     background: var(--bg-grad);
     background-attachment: fixed;
     color: #f8f9fa;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ===================== */
+/*   WELCOME SCREEN      */
+/* ===================== */
+#welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+}
+
+.welcome-header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeInDown 0.9s ease-out;
+}
+
+.welcome-title {
+    font-size: 3.8rem;
+    font-weight: 800;
+    margin: 0 0 16px 0;
+    background: linear-gradient(to right, #f3e5ab, #d4af37, #4caf7d, #f3e5ab);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+    letter-spacing: -1px;
+}
+
+@keyframes shimmer {
+    from { background-position: 0% center; }
+    to { background-position: 200% center; }
+}
+
+.welcome-subtitle {
+    font-size: 1.4rem;
+    color: rgba(248, 249, 210, 0.7);
+    font-weight: 400;
+    font-style: italic;
+    margin: 0;
+}
+
+.holiday-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 800px;
+    animation: fadeIn 1.1s ease-out;
+}
+
+/* Base holiday card */
+.holiday-card {
+    position: relative;
+    border-radius: 28px;
+    padding: 50px 35px 40px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
+    overflow: hidden;
+    user-select: none;
+}
+
+.holiday-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.holiday-card:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+.holiday-card:hover::before {
+    opacity: 1;
+}
+
+.holiday-card:active {
+    transform: translateY(-4px) scale(0.99);
+}
+
+/* Pesach card */
+.holiday-pesach {
+    background: linear-gradient(145deg, rgba(114, 47, 55, 0.6), rgba(30, 10, 15, 0.8));
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 15px 50px rgba(114, 47, 55, 0.4), inset 0 0 40px rgba(212, 175, 55, 0.05);
+}
+
+.holiday-pesach::before {
+    background: radial-gradient(ellipse at top, rgba(212, 175, 55, 0.15), transparent 70%);
+}
+
+.holiday-pesach:hover {
+    box-shadow: 0 25px 70px rgba(114, 47, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.25);
+    border-color: rgba(212, 175, 55, 0.7);
+}
+
+/* Shavuot card */
+.holiday-shavuot {
+    background: linear-gradient(145deg, rgba(30, 70, 45, 0.6), rgba(10, 30, 20, 0.85));
+    border: 1px solid rgba(76, 175, 125, 0.4);
+    box-shadow: 0 15px 50px rgba(30, 70, 45, 0.4), inset 0 0 40px rgba(76, 175, 125, 0.05);
+}
+
+.holiday-shavuot::before {
+    background: radial-gradient(ellipse at top, rgba(76, 175, 125, 0.15), transparent 70%);
+}
+
+.holiday-shavuot:hover {
+    box-shadow: 0 25px 70px rgba(30, 70, 45, 0.6), 0 0 40px rgba(76, 175, 125, 0.25);
+    border-color: rgba(76, 175, 125, 0.7);
+}
+
+.holiday-card-icon {
+    font-size: 4.5rem;
+    margin-bottom: 20px;
+    display: block;
+    filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
+    transition: transform 0.3s ease;
+}
+
+.holiday-card:hover .holiday-card-icon {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+.holiday-card-title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    letter-spacing: 1px;
+}
+
+.holiday-pesach .holiday-card-title {
+    color: var(--gold-light);
+    text-shadow: 0 2px 15px rgba(212, 175, 55, 0.5);
+}
+
+.holiday-shavuot .holiday-card-title {
+    color: #a8e6c3;
+    text-shadow: 0 2px 15px rgba(76, 175, 125, 0.5);
+}
+
+.holiday-card-desc {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0 0 30px 0;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.holiday-card-arrow {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 28px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.holiday-pesach .holiday-card-arrow {
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold-light);
+}
+
+.holiday-pesach:hover .holiday-card-arrow {
+    background: rgba(212, 175, 55, 0.3);
+}
+
+.holiday-shavuot .holiday-card-arrow {
+    background: rgba(76, 175, 125, 0.15);
+    border: 1px solid rgba(76, 175, 125, 0.4);
+    color: #a8e6c3;
+}
+
+.holiday-shavuot:hover .holiday-card-arrow {
+    background: rgba(76, 175, 125, 0.3);
+}
+
+.welcome-footer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--wine);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    pointer-events: none;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ===================== */
+/*    GAME SCREEN        */
+/* ===================== */
+#game-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
-    padding: 10px 20px 40px;
-    box-sizing: border-box;
-    overflow-x: hidden;
+    padding: 10px 20px 80px;
 }
 
 h1 {
@@ -39,6 +260,12 @@ h1 {
     letter-spacing: -1px;
 }
 
+#game-screen.shavuot-mode h1 {
+    background: linear-gradient(to right, #a8e6c3, #4caf7d, #a8e6c3);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
 .mode-subtitle {
     font-size: 1.4rem;
     color: rgba(248, 249, 210, 0.7);
@@ -49,7 +276,7 @@ h1 {
     animation: fadeIn 1.2s ease-out;
 }
 
-/* Mode Toggle Styles */
+/* Mode Toggle */
 .mode-container {
     display: flex;
     flex-direction: column;
@@ -126,6 +353,54 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+/* Home + How-to-play buttons */
+#how-to-play-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #666;
+    color: white;
+    z-index: 900;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+#how-to-play-btn:hover {
+    background: #777;
+    transform: translateY(-2px);
+}
+
+#home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.85);
+    z-index: 900;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+#home-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Grid */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -179,11 +454,17 @@ input:checked + .slider:before {
     transform: rotateY(180deg);
 }
 
-.card:hover .card-front, 
+.card:hover .card-front,
 .card:hover .card-back {
     box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
     border-color: rgba(212, 175, 55, 0.5);
     background: rgba(255, 255, 255, 0.08);
+}
+
+#game-screen.shavuot-mode .card:hover .card-front,
+#game-screen.shavuot-mode .card:hover .card-back {
+    box-shadow: 0 15px 40px rgba(76, 175, 125, 0.2);
+    border-color: rgba(76, 175, 125, 0.5);
 }
 
 .card h3 {
@@ -193,6 +474,11 @@ input:checked + .slider:before {
     font-weight: 600;
     letter-spacing: 1px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#game-screen.shavuot-mode .card h3 {
+    color: #a8e6c3;
+    text-shadow: 0 2px 10px rgba(76, 175, 125, 0.3);
 }
 
 .card h4 {
@@ -263,25 +549,6 @@ button:active {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-#how-to-play-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #666;
-    color: white;
-    z-index: 900;
-    padding: 10px 18px;
-    font-size: 0.95rem;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-}
-
-#how-to-play-btn:hover {
-    background: #777;
-    transform: translateY(-2px);
-}
-
 /* Overlay (Modal) Style */
 .overlay {
     display: none;
@@ -337,6 +604,7 @@ button:active {
     margin-bottom: 25px;
     letter-spacing: 2px;
     font-weight: 600;
+    flex-shrink: 0;
 }
 
 #question-text {
@@ -361,24 +629,13 @@ button:active {
     font-size: 1.15rem;
     line-height: 1.8;
     overflow-y: auto;
-    padding-left: 10px; /* Space for scrollbar */
+    padding-left: 10px;
     flex: 1;
 }
 
-/* Custom scrollbar for instructions */
-.instructions-content::-webkit-scrollbar {
-    width: 6px;
-}
-
-.instructions-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-}
-
-.instructions-content::-webkit-scrollbar-thumb {
-    background: var(--gold-light);
-    border-radius: 10px;
-}
+.instructions-content::-webkit-scrollbar { width: 6px; }
+.instructions-content::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+.instructions-content::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 10px; }
 
 .instructions-content ul {
     list-style: none;
@@ -404,6 +661,7 @@ button:active {
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
+    flex-shrink: 0;
 }
 
 .btn-refresh {
@@ -433,68 +691,8 @@ button:active {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* Essential Animations */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInCard {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Mobile Adjustments */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2.2rem;
-        margin-bottom: 30px;
-    }
-
-    #question-text {
-        font-size: 1.6rem;
-        min-height: 100px;
-    }
-
-    .overlay-box {
-        padding: 30px 20px;
-    }
-
-    .overlay-btns {
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-    }
-
-    .btn-refresh,
-    .btn-back {
-        width: 100%;
-        max-width: none;
-    }
-
-    #how-to-play-btn {
-        top: 10px;
-        right: 10px;
-        font-size: 0.85rem;
-        padding: 8px 14px;
-    }
-}
-
-footer {
+/* Game screen footer */
+#game-screen footer {
     position: fixed;
     bottom: 20px;
     left: 50%;
@@ -514,4 +712,60 @@ footer {
     pointer-events: none;
     font-weight: 600;
     white-space: nowrap;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInCard {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+    .welcome-title { font-size: 2.6rem; }
+    .welcome-subtitle { font-size: 1.1rem; }
+    .holiday-grid { gap: 20px; }
+    .holiday-card { padding: 40px 25px 35px; }
+    .holiday-card-icon { font-size: 3.5rem; }
+    .holiday-card-title { font-size: 2rem; }
+
+    h1 { font-size: 2.2rem; }
+    #question-text { font-size: 1.6rem; min-height: 100px; }
+
+    .overlay-box { padding: 30px 20px; }
+
+    .overlay-btns {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .btn-refresh, .btn-back {
+        width: 100%;
+        max-width: none;
+    }
+
+    #how-to-play-btn {
+        top: 10px;
+        right: 10px;
+        font-size: 0.85rem;
+        padding: 8px 14px;
+    }
+
+    #home-btn {
+        top: 10px;
+        left: 10px;
+        font-size: 0.85rem;
+        padding: 8px 14px;
+    }
 }

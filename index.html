@@ -4,66 +4,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מדברים פסח - רגע של חיבור ושיחה</title>
+    <title>מדברים בחגים - בוחרים חג, מתחברים ומתחילים לדבר</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍷</text></svg>">
-    <!-- Modern typography from Google Fonts -->
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌾</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <button id="how-to-play-btn" onclick="openInstructions()">איך משחקים? ❓</button>
-    <div class="mode-container">
-        <label class="switch">
-            <input type="checkbox" id="mode-toggle" onchange="toggleMode()">
-            <span class="slider round"></span>
-        </label>
-        <div class="mode-labels">
-            <span id="label-family">מצב משפחה 🍷</span>
-            <span id="label-team" class="active">מצב צוות 💻</span>
+    <!-- ===== WELCOME SCREEN ===== -->
+    <div id="welcome-screen">
+        <div class="welcome-header">
+            <h1 class="welcome-title">מדברים בחגים</h1>
+            <p class="welcome-subtitle">בוחרים חג, מתחברים ומתחילים לדבר</p>
         </div>
-    </div>
-    <h1>🍷 מדברים פסח</h1>
-    <h2 id="mode-subtitle" class="mode-subtitle">פעילות גיבוש לצוות</h2>
 
-    <div class="grid" id="main-grid">
-    </div>
+        <div class="holiday-grid">
+            <div class="holiday-card holiday-pesach" onclick="selectHoliday('pesach')" role="button" tabindex="0">
+                <div class="holiday-card-icon">🍷</div>
+                <h2 class="holiday-card-title">פסח</h2>
+                <p class="holiday-card-desc">חירות, זהות ושאלות של דורות</p>
+                <div class="holiday-card-arrow">התחל →</div>
+            </div>
 
-    <div id="overlay" class="overlay">
-        <div id="question-box" class="overlay-box">
-            <h2 id="overlay-title" class="overlay-title"></h2>
-            <div id="question-text">שאלה תופיע כאן...</div>
-            <div class="overlay-btns">
-                <button class="btn-refresh" onclick="generateQuestion()">החלף שאלה 🎲</button>
-                <button class="btn-back" onclick="closeOverlay()">חזרה לתפריט ↩️</button>
+            <div class="holiday-card holiday-shavuot" onclick="selectHoliday('shavuot')" role="button" tabindex="0">
+                <div class="holiday-card-icon">🌾</div>
+                <h2 class="holiday-card-title">שבועות</h2>
+                <p class="holiday-card-desc">ביכורים, נאמנות ומה שמגדל אותנו</p>
+                <div class="holiday-card-arrow">התחל →</div>
             </div>
         </div>
+
+        <footer class="welcome-footer">מדברים בחגים | נוצר על ידי איתי גוזלן</footer>
     </div>
 
-    <div id="instructions-overlay" class="overlay">
-        <div class="overlay-box" id="instructions-box">
-            <h2 class="overlay-title">איך משחקים?</h2>
-            <div class="instructions-content">
-                <ul>
-                    <li><strong>פשוט וכיפי:</strong> בוחרים סימן (כרטיס).</li>
-                    <li><strong>קליל או עמוק?</strong> מחליטים אם בא לכם לענות על שאלה קלילה ("חימום") או שאלה קצת יותר
-                        עמוקה ("גילוי").</li>
-                    <li><strong>משתפים:</strong> עונים על השאלה שעלתה. לא זורם? אפשר ללחוץ על ה-🎲 כדי להחליף שאלה.</li>
-                    <li><strong>מעבירים:</strong> כשמסיימים, בוחרים את המשתתף הבא שיענה על שאלה.</li>
-                </ul>
-            </div>
-            <div class="overlay-btns">
-                <button class="btn-back" onclick="closeInstructions()">סגור ✕</button>
+    <!-- ===== GAME SCREEN ===== -->
+    <div id="game-screen" style="display: none;">
+
+        <button id="how-to-play-btn" onclick="openInstructions()">איך משחקים? ❓</button>
+        <button id="home-btn" onclick="goHome()">🏠 החג הבא</button>
+
+        <div class="mode-container">
+            <label class="switch">
+                <input type="checkbox" id="mode-toggle" onchange="toggleMode()">
+                <span class="slider round"></span>
+            </label>
+            <div class="mode-labels">
+                <span id="label-family">מצב משפחה 🍷</span>
+                <span id="label-team" class="active">מצב צוות 💻</span>
             </div>
         </div>
-    </div>
 
-    <footer>מדברים פסח | נוצר על ידי איתי גוזלן</footer>
+        <h1 id="game-title">🍷 מדברים פסח</h1>
+        <h2 id="mode-subtitle" class="mode-subtitle">פעילות גיבוש לצוות</h2>
+
+        <div class="grid" id="main-grid"></div>
+
+        <!-- Question overlay -->
+        <div id="overlay" class="overlay">
+            <div id="question-box" class="overlay-box">
+                <h2 id="overlay-title" class="overlay-title"></h2>
+                <div id="question-text">שאלה תופיע כאן...</div>
+                <div class="overlay-btns">
+                    <button class="btn-refresh" onclick="generateQuestion()">החלף שאלה 🎲</button>
+                    <button class="btn-back" onclick="closeOverlay()">חזרה לתפריט ↩️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions overlay -->
+        <div id="instructions-overlay" class="overlay">
+            <div class="overlay-box" id="instructions-box">
+                <h2 class="overlay-title">איך משחקים?</h2>
+                <div class="instructions-content">
+                    <ul>
+                        <li><strong>פשוט וכיפי:</strong> בוחרים סימן (כרטיס).</li>
+                        <li><strong>קליל או עמוק?</strong> מחליטים אם בא לכם לענות על שאלה קלילה ("חימום") או שאלה קצת יותר
+                            עמוקה ("גילוי").</li>
+                        <li><strong>משתפים:</strong> עונים על השאלה שעלתה. לא זורם? אפשר ללחוץ על ה-🎲 כדי להחליף שאלה.</li>
+                        <li><strong>מעבירים:</strong> כשמסיימים, בוחרים את המשתתף הבא שיענה על שאלה.</li>
+                    </ul>
+                </div>
+                <div class="overlay-btns">
+                    <button class="btn-back" onclick="closeInstructions()">סגור ✕</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>מדברים בחגים | נוצר על ידי איתי גוזלן</footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
